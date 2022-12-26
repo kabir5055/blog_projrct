@@ -39,6 +39,11 @@ Route::get('/blog-signOut',[BlogProjectController::class,'signOut'])->name('blog
 
 Route::post('/new-comment',[CommentController::class,'saveComment'])->name('new.comment');
 
+Route::group(['middleware' => 'blogUser'],function (){
+    Route::post('/new-comment',[CommentController::class,'saveComment'])->name('new.comment');
+    Route::get('/details/{slug}',[BlogProjectController::class,'details'])->name('details');
+
+});
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {

@@ -12,6 +12,10 @@ class Comment extends Model
     public static $comment;
     public static function saveComment($request)
     {
+        $request->validate([
+            'comment' => 'required|min:5|max:255|string',
+        ]);
+
         self::$comment = new Comment();
         self::$comment->blog_id = $request->blog_id;
         self::$comment->user_id = $request->user_id;

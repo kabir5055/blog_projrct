@@ -95,12 +95,21 @@
                                         <input type="hidden" name="user_id" value="{{ Session::get('userId') }}">
                                         <div class="col-12 mb-3">
                                             <label for="comment-message" class="mb-2">Comment</label>
-                                            <textarea class="form-control" name="comment" id="comment-message" placeholder="Enter your name" cols="30" rows="10"></textarea>
+                                            <textarea class="form-control @error('comment') is-invalid @enderror" name="comment" id="comment-message" placeholder="Enter your name" cols="30" rows="10"></textarea>
                                         </div>
                                         <div class="col-12">
                                             <input type="submit" class="btn btn-primary" value="Post comment">
                                         </div>
                                     </form>
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 </div>
                             @else
                                 <h3 class="text-success mt-5">Please
